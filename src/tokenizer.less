@@ -1,0 +1,70 @@
+.tokenizer {
+    .no-animation {
+        transition: none !important;
+    }
+    .separator {
+        height: 24px;
+        padding: 8px 4px 0px 4px;
+        margin: -4px 0 0px 0;
+        transition: transform 0.2s ease-out;
+        cursor: text;
+        border-bottom: 2px solid transparent;
+
+        &:not(.bk-edited-node):hover {
+            background-image: url(/resources/img/sage-icons/fill-dots-gray5.png);
+        }
+
+        &.bk-edited-node {
+            height: 20px;
+            transform: translate3d(8px, 0, 0);
+            transition: transform 0.2s ease-in;
+        }
+
+        &.bk-edited-node ~ .token {
+            transform: translate3d(16px, 0, 0);
+            transition: transform 0.2s ease-in;
+        }
+
+
+        &.bk-edited-node ~ .separator {
+            transform: translate3d(16px, 0, 0);
+            transition: transform 0.2s ease-in;
+        }
+
+        &.bk-edited-node:not(:empty) {
+            border-bottom: 2px dotted @grey4;
+            border-radius: 2px;
+        }
+    }
+
+    .init-token {
+        position: relative;
+        background-color: transparent;
+        padding-left: 4px;
+        padding-right: 4px;
+        padding-top: 4px;
+
+        &:hover {
+            border-bottom: inherit;
+        }
+
+        &:not(:empty) {
+            border-bottom: 2px dotted @grey7;
+        }
+    }
+
+    .token {
+        position: relative;
+        white-space: pre;
+        transition: transform 0.2s ease-out;
+
+        &:after {
+            display: none;
+            position: absolute;
+        }
+
+        &:not(.bk-edited-node):hover:after {
+            display: block;
+        }
+    }
+}
