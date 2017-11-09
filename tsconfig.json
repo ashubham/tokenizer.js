@@ -13,11 +13,11 @@
     },
     "exclude": [
         "dist/**/*",
-        "node_modules",
-        "test/**/*"
+        "node_modules"
     ],
     "include": [
         "src/",
-        "index.ts"
+        "index.ts",
+        "test"
     ]
 }

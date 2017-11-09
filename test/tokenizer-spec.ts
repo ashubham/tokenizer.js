@@ -4,10 +4,10 @@
  *
  * @fileoverview Tests for Tokenizer Widget.
  */
-import rangy from 'rangy';
+import * as rangy from 'rangy';
 import {Key} from 'w3c-keys';
-import {Tokenizer, TokenizerConfig} from './tokenizer';
-import * as utils from './tokenizer-utils';
+import {Tokenizer, TokenizerConfig} from '../src/tokenizer';
+import * as utils from '../src/tokenizer-utils';
 
 let defaultConfig: TokenizerConfig = {
     initialInput: [{
