@@ -11,10 +11,7 @@ import {browserName, Browsers} from './browser';
 
 export {Key};
 
-declare let blink;
-
-let isIE: boolean = !!blink.app.isIE;
-let isChrome: boolean = !!blink.app.isChrome;
+let isChrome: boolean = browserName === Browsers.Chrome;
 
 let rangyOptions = {
     wordOptions: {
