@@ -35,7 +35,11 @@ import {
     handleBrowserKeydownQuirks, initTokenTpl,
     separatorTemplate, shouldReplaceNWSP, typingDebounce
 } from './tokenizer-browser-quirks';
-import {DisplayToken, TokenizerConfig} from './tokenizer-config';
+import {
+    DisplayToken,
+    TokenizerConfig,
+    defaultConfig
+} from './tokenizer-config';
 import * as utils from './tokenizer-utils';
 
 export let classes = utils.classes;
@@ -47,6 +51,7 @@ export class Tokenizer {
     private _innerHtml: string = '';
     private innerText: string;
     private hasWrapped: boolean;
+    private config: TokenizerConfig;
     private subscriptions: Subscription[] = [];
 
     private get innerHtml(): string {
@@ -59,8 +64,9 @@ export class Tokenizer {
         this.innerText = this.getInnerText();
     }
 
-    constructor(private el: HTMLElement, private config: TokenizerConfig) {
+    constructor(private el: HTMLElement, config: TokenizerConfig) {
         this.el.classList.add(classes.TOKENIZER);
+        this.config = Object.assign({}, defaultConfig, config);
         this.tokenizeDisplay(this.config.initialInput, true);
         this.setupEventListeners();
         this.setHasWrapped();

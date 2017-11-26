@@ -8,7 +8,7 @@
         "removeComments": false,
         "noImplicitAny": false,
         "experimentalDecorators": true,
-        "outDir": "dist/",
+        "outDir": "build/",
         "lib" : ["es2016", "es5", "es6", "dom"]        
     },
     "exclude": [

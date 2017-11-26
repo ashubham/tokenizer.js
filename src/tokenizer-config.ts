@@ -31,13 +31,13 @@ export interface TokenizerConfig {
      * Initial token state, when the Tokenizer is initialized.
      * This shows up as initial tokens.
      */
-    initialInput: DisplayToken[];
+    initialInput?: DisplayToken[];
 
     /**
      * Flag to indicate whether the tokenizer is in focus when
      * initialized.
      */
-    isFocused: boolean;
+    isFocused?: boolean;
 
     /**
      * A callback called whenever the text in the tokenizer is changed.
@@ -57,7 +57,7 @@ export interface TokenizerConfig {
      * @param evt
      * @returns boolean Flag indicating whether to propagate the event further.
      */
-    onKeyDown: (evt: KeyboardEvent) => boolean;
+    onKeyDown?: (evt: KeyboardEvent) => boolean;
 
     /**
      * Callback called when focus state of the tokenizer is changed.
@@ -65,7 +65,7 @@ export interface TokenizerConfig {
      *
      * @param boolean isFocused
      */
-    onFocusChanged: (isFocused: boolean) => void;
+    onFocusChanged?: (isFocused: boolean) => void;
 
     /**
      * Callback called when wrapping state of the tokenizer changes.
@@ -73,7 +73,7 @@ export interface TokenizerConfig {
      *
      * @param boolean isWrapped.
      */
-    onWrap: (isWrapped: boolean) => void;
+    onWrap?: (isWrapped: boolean) => void;
 
     /**
      * Callback called when the caret position is changed. For eg.
@@ -98,4 +98,15 @@ export interface TokenizerConfig {
      * Callback called when the user stop hovering over any tokens.
      */
     onMouseOutTokenizer?:() => void;
+}
+
+export const defaultConfig = {
+    initialInput: [],
+    isFocused: false,
+    onFocusChanged: (isFocused) => {},
+    onKeyDown: (evt) => { return true },
+    onWrap: (isWrapped) => {},
+    onCaretPositionChanged: () => {},
+    onMouseOverToken: () => {},
+    onMouseOutTokenizer: () => {}
 }

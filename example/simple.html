@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <title>Tokenizer Simple</title>
+        <script src="../dist/tokenizer.js"></script>
+        <link rel="stylesheet" href="../dist/tokenizer.css">
+        <script>
+            document.addEventListener("DOMContentLoaded", function(event) { 
+                let tok = new Tokenizer.Tokenizer(
+                    document.getElementById('input'),
+                    {
+                        onChange: (inputStr, caretPosition) => {
+                            return new Promise(resolve => {
+                                let tokens = inputStr
+                                    .split(';')
+                                    .map(token => {
+                                        return {
+                                            value: token,
+                                            className: 'token-type-a',
+                                            isIncomplete: false,
+                                            isExtensible: false
+                                        }
+                                    });
+                                let lastToken = tokens[tokens.length - 1];
+                                if(lastToken.value) {
+                                    lastToken.isIncomplete = true;
+                                    lastToken.className = 'incomplete-token';
+                                } else {
+                                    tokens.pop();
+                                }
+                                return resolve(tokens);
+                            });
+                        },
+                        onCaretPositionChanged: () => {}
+                    }
+                );
+            });
+        </script>
+        <style>
+            .tokenizer {
+                width: 80%;
+                border: 1px solid black;                
+            }
+        </style>
+    </head>
+    <body>
+        <div id="input" class="tokenizer" contenteditable>
+        </div>
+    </body>
+</html>

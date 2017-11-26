@@ -1,0 +1,170 @@
+@import './helpers.less';
+
+.tokenizer {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex: 1 1 0px;
+    min-width: 0px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-self: flex-start;
+    min-height: 32px;
+    padding: 8px 5px 0 5px;
+    font-size: 15px;
+    line-height: 20px;
+    letter-spacing: 0px;
+    font-family: Regular,helvetica neue,helvetica,Arial,sans-serif;
+    border-radius:3px;
+    border-right: none;
+    color: #4e515e;
+    overflow: hidden;
+    word-wrap: break-word;
+
+    .no-animation {
+        transition: none !important;
+    }
+    .separator {
+        height: 24px;
+        padding: 8px 4px 0px 4px;
+        margin: -4px 0 0px 0;
+        transition: transform 0.2s ease-out;
+        cursor: text;
+        border-bottom: 2px solid transparent;
+
+        &:not(.bk-edited-node):hover {
+            background-image: url(../resources/img/fill-dots-gray5.png);
+        }
+
+        &.bk-edited-node {
+            height: 20px;
+            transform: translate3d(8px, 0, 0);
+            transition: transform 0.2s ease-in;
+        }
+
+        &.bk-edited-node ~ .token {
+            transform: translate3d(16px, 0, 0);
+            transition: transform 0.2s ease-in;
+        }
+
+
+        &.bk-edited-node ~ .separator {
+            transform: translate3d(16px, 0, 0);
+            transition: transform 0.2s ease-in;
+        }
+
+        &.bk-edited-node:not(:empty) {
+            border-bottom: 2px dotted #BFBFBF;
+            border-radius: 2px;
+        }
+    }
+
+    .init-token {
+        position: relative;
+        background-color: transparent;
+        padding-left: 4px;
+        padding-right: 4px;
+        padding-top: 4px;
+
+        &:hover {
+            border-bottom: inherit;
+        }
+
+        &:not(:empty) {
+            border-bottom: 2px dotted #333333;
+        }
+    }
+
+    .token {
+        position: relative;
+        white-space: pre;
+        transition: transform 0.2s ease-out;
+
+        &:after {
+            display: none;
+            position: absolute;
+        }
+
+        &:not(.bk-edited-node):hover:after {
+            display: block;
+        }
+    }
+
+    .token {
+        background-color: #ECECEC;
+        border-bottom: 2px solid #ECECEC;
+        border-radius: 2px;
+        margin: 0px 0 8px 0;
+        padding: 4px 4px 0 4px;
+        height: 20px;
+        max-width: 100%;
+        text-overflow: ellipsis;
+        position: relative;
+        white-space: pre;
+        transition: transform 0.2s ease-out;
+
+        &:not(.bk-edited-node):hover:after {
+            display: block;
+        }
+
+        &.bk-edited-node {
+            background-color: inherit;
+            color: #4e515e;
+        }
+
+        &:hover {
+            background-color: inherit;
+            transition: background 0.1s ease-out;
+        }
+
+        &.removed {
+            max-width: 0;
+            transform: scale(0);
+            transition: transform 0.2s ease-out, max-width 0.2s ease-out 0.2s;
+        }
+
+        // This is the remove button.
+        &:after {
+            display: none;
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 900;
+            top: -8px;
+            right: -3px;
+            content: "\00d7";
+            border-radius: 10px;
+            cursor: pointer;
+            background: #616161;
+            z-index: 1;
+            line-height: 17px;
+            color: #fff;
+        }
+    }
+
+    .token-type-a {
+        background-color: #e7f4ff;
+        border-bottom: 2px solid #85C8FF;
+    }
+
+    .token-type-b {
+        background: #FFF3D0;
+        border-bottom: 2px solid #FFF3D0;
+    }
+
+    .incomplete-token {
+        background-color: #FFD6CE;
+        border-bottom: 2px solid #FFD6CE;
+
+        margin-right: 8px;
+        padding-left: 4px;
+        padding-right: 4px;
+
+        &.bk-edited-node {
+            margin-left: 0;
+            border-bottom: 2px dotted #BFBFBF;
+        }
+    }    
+}
