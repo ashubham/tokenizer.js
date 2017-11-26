@@ -4,6 +4,6 @@
 
 A modern async text tokenizer, for the modern web.
 
-![alt text](https://github.com/ashubham/tokenizer.js/raw/master/assets/tokenizer.gif "Tokenizer Demo")
+![](https://github.com/ashubham/tokenizer.js/raw/master/assets/tokenizer.gif)
 
 
