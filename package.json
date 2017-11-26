@@ -1,8 +1,9 @@
 {
   "name": "tokenizer.js",
-  "version": "1.1.0",
+  "version": "1.2.3",
   "description": "A modern runtime text tokenizer, for modern web.",
   "main": "build/index.js",
+  "unpkg": "dist/tokenizer.js",
   "typings": "build/index.d.ts",
   "directories": {
     "test": "test"
@@ -13,6 +14,10 @@
     "dist": "npm run build && webpack --config=webpack.config.js",
     "test": "npm run build && karma start karma.conf.js && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
+  "files": [
+    "dist",
+    "build"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ashubham/tokenizer.js.git"

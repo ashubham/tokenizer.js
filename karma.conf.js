@@ -16,13 +16,13 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'dist/test/*.js'
+      'build/test/*.js'
     ],
 
 
     // list of files to exclude
     exclude: [
-      'dist/index.js'
+      'build/index.js'
     ],
 
     webpack: {
