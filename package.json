@@ -1,6 +1,6 @@
 {
   "name": "tokenizer.js",
-  "version": "1.2.3",
+  "version": "1.2.6",
   "description": "A modern runtime text tokenizer, for modern web.",
   "main": "build/index.js",
   "unpkg": "dist/tokenizer.js",
@@ -16,7 +16,9 @@
   },
   "files": [
     "dist",
-    "build"
+    "build",
+    "README.md",
+    "resources"
   ],
   "repository": {
     "type": "git",
