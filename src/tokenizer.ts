@@ -132,9 +132,7 @@ export class Tokenizer {
      * Update the tokenizer display with a new set of tokens.
      *
      * @param tokens
-     * @param fullText
-     * @param caretPosition
-     * @param tokenIdx
+     * @param caretTokenIdx {number} Where to put caret.
      * @param refreshTokens {boolean} Whether to reTokenize
      */
     public updateDisplay(tokens: DisplayToken[],
@@ -389,6 +387,7 @@ export class Tokenizer {
             .subscribe((evt) => {
                 this.setHasWrapped();
                 this.config.onFocusChanged(false);
+                this.setEditedNode(undefined);
             });
         this.subscriptions.push(blurSubscription);
     }

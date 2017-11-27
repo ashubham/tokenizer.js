@@ -9,6 +9,6 @@ module.exports = {
         library: 'Tokenizer'
     },
     plugins: [
-        //new UglifyJSPlugin()
+        new UglifyJSPlugin()
     ]
 };

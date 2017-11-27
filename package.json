@@ -1,6 +1,6 @@
 {
   "name": "tokenizer.js",
-  "version": "1.2.6",
+  "version": "1.2.8",
   "description": "A modern runtime text tokenizer, for modern web.",
   "main": "build/index.js",
   "unpkg": "dist/tokenizer.js",
@@ -12,7 +12,8 @@
     "buildCSS": "lessc styles/tokenizer.less dist/tokenizer.css",
     "build": "tsc -p . && npm run buildCSS",
     "dist": "npm run build && webpack --config=webpack.config.js",
-    "test": "npm run build && karma start karma.conf.js && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "test": "npm run build && karma start karma.conf.js && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "prepublish": "npm run dist"
   },
   "files": [
     "dist",
