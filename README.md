@@ -10,6 +10,7 @@ A modern async text tokenizer, for the modern web.
 
 - Pure Javascript (No JQuery/Frameworks).
 - Based on Reactive Streams (RxJS).
+- Fully Async, get tokenization using REST calls.
 - Written in TypeScript (types bundled).
 - Battle tested on all modern browsers (and IE11).
 - Fully customizable using CSS.
@@ -57,9 +58,9 @@ selectNodeByIdx (idx: number) | Sets the caret at the start of the `idx` index t
 
 Option Name | Type | Description
 --- | --- | ---
-initialInput | [DisplayToken[]](#DisplayToken)| Initial token state, when the Tokenizer is initialized, this shows up as initial tokens.
+initialInput | [DisplayToken[]](#displaytoken)| Initial token state, when the Tokenizer is initialized, this shows up as initial tokens.
 isFocused | bool | Flag to indicate whether the tokenizer is in focus when initialized.
-onChange | (inputText: `string`, caretPosition: `number`, isCaretOnSeparator?: `boolean`) => `PromiseLike<DisplayToken[]>` | A callback called whenever the text in the tokenizer is changed. This should return a Promise resolving to the new tokenization state.
+onChange | (inputText: `string`, caretPosition: `number`, isCaretOnSeparator?: `boolean`) => PromiseLike<[DisplayToken](#displaytoken)[]> | A callback called whenever the text in the tokenizer is changed. This should return a Promise resolving to the new tokenization state.
 onKeyDown | (event: KeyboardEvent) => bool | Callback called on each keydown inside the tokenizer. Return `false` to stop propagation.
 onFocusChanged | (isFocused: boolean) => void | Callback called when focus state of the tokenizer is changed. The param `isFocused` indicates the new focus state.
 onWrap | (isWrapped: boolean) => void | Callback called when wrapping state of the tokenizer changes. The param `isWrapped` represents whether the tokenizer is wrapping.
