@@ -19,6 +19,10 @@ A modern async text tokenizer, for the modern web. [Demo](https://codepen.io/ash
 - Hooks and callbacks included.
 - Support for IME locales like (Hiragana, Kenji etc.)
 
+## Articles
+
+- [Supercharge your search bar with visual tokens!](https://medium.com/@ashishshubham/supercharge-your-search-with-tokenization-32321a87f309)
+
 ## Usage
 ```html
 <div id="input" contenteditable></div>
@@ -119,7 +123,7 @@ tokenizer.getNumTokens() // 4
 tokenizer.selectNodeByIdx(idx: number);
 ```
 
- ### DisplayToken
+ ## DisplayToken
 
  This is a structure which represents a token. Its an object
  with these properties:
