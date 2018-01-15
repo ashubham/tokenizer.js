@@ -17,15 +17,17 @@ A modern async text tokenizer, for the modern web.
 - Hooks and callbacks included.
 
 ## Usage
+```html
+    <div id="input" contenteditable></div>
+```
 ```javascript
 import {Tokenizer} from 'tokenizer.js';
 
 let el = document.getElementById('input');
-let tokenizer = new Tokenizer(el, // Target element
-    {
+let tokenizer = new Tokenizer(el /* Target element */, {
         onChange: () => {
             // return a Promise resolving to 
-            // tokens<DisplayToken>.
+            // tokens.
         }
     }
 );
@@ -38,18 +40,42 @@ let tokenizer = new Tokenizer(el, // Target element
 
 ## Config Options
 
-Option Name | Type | Description
---- | --- | ---
-`initialInput` | [DisplayToken[]](#displaytoken)| Initial token state, when the Tokenizer is initialized, this shows up as initial tokens.
-`isFocused` | `bool` | Flag to indicate whether the tokenizer is in focus when initialized.
-`onChange` | ```(inputText: string, caretPosition: number, isCaretOnSeparator?: boolean) => PromiseLike<DisplayToken[]>``` | A callback called whenever the text in the tokenizer is changed. This should return a Promise resolving to the new tokenization state.
-`onKeyDown` | `(event: KeyboardEvent) => bool` | Callback called on each keydown inside the tokenizer. Return `false` to stop propagation.
-`onFocusChanged` | `(isFocused: boolean) => void` | Callback called when focus state of the tokenizer is changed. The param `isFocused` indicates the new focus state.
-`onWrap` | `(isWrapped: boolean) => void` | Callback called when wrapping state of the tokenizer changes. The param `isWrapped` represents whether the tokenizer is wrapping.
- `onCaretPositionChanged` | ```(inputText: string, caretPosiotion: number, isCaretOnSeparator: boolean) => void``` | Callback called when the caret position is changed. For eg. using arrow keys, backspace, click etc.
- `onMouseOverToken` | `(tokenIndex, e) => void` | Callback called when a token is hovered over.
- `onMouseOutTokenizer` | `() => void` | Callback called when the user stop hovering over any tokens.
+```typescript
+ let tokenizer = new Tokenizer(el, {
+    initialInput: [], //  Initial token state, when the Tokenizer is initialized, this shows up as initial tokens.
 
+    isFocused: false, //Flag to indicate whether the tokenizer is in focus when initialized.
+
+
+    // A callback called whenever the text in the tokenizer is changed. 
+    //This should return a Promise resolving to the new tokenization state.
+    onChange: (inputText: string, caretPosition: number, isCaretOnSeparator?: boolean) => {
+        return new Promise<DisplayToken[]>();
+    },
+
+    // Callback called on each keydown inside the tokenizer.
+    // Return `false` to stop propagation.
+    onKeyDown: (event: KeyboardEvent) => true,
+
+    // Callback called when focus state of the tokenizer is changed. 
+    // The param `isFocused` indicates the new focus state.
+    onFocusChanged: (isFocused: boolean) => void,
+
+    // Callback called when wrapping state of the tokenizer changes. 
+    // The param `isWrapped` represents whether the tokenizer is wrapping.
+    onWrap: (isWrapped: boolean) => void,
+
+    // Callback called when the caret position is changed. 
+    // For eg. using arrow keys, backspace, click etc.
+    onCaretPositionChanged: (inputText: string, caretPosiotion: number, isCaretOnSeparator: boolean) => void,
+
+    // Callback called when a token is hovered over.
+    onMouseOverToken: (tokenIndex: number, e: MouseEvent) => void,
+
+    // Callback called when the user stop hovering over any tokens.
+    onMouseOutTokenizer: () => void
+ })
+```
 
 ## Public Methods
 
