@@ -1,6 +1,5 @@
 /**
- * Copyright: ThoughtSpot Inc. 2016
- * Author: Ashish Shubham (ashish@thoughtspot.com)
+ * Author: Ashish Shubham (ashubham@gmail.com)
  *
  * @fileoverview Utils to manage caret in the tokenizer.
  */

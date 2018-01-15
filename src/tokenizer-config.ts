@@ -1,6 +1,5 @@
 /**
- * Copyright: ThoughtSpot Inc. 2017
- * Author: Ashish Shubham (ashish@thoughtspot.com)
+ * Author: Ashish Shubham (ashubham@gmail.com)
  *
  * @fileoverview Config interface for the tokenizer
  */
