@@ -16,6 +16,7 @@ A modern async text tokenizer, for the modern web. [Demo](https://codepen.io/ash
 - Battle tested on all modern browsers (and IE11).
 - Fully customizable using CSS.
 - Hooks and callbacks included.
+- Support for IME locales like (Hiragana, Kenji etc.)
 
 ## Usage
 ```html

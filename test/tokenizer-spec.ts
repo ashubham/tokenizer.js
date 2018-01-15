@@ -56,6 +56,13 @@ describe('Tokenizer', () => {
         expect(tok.getInnerText()).toEqual('token1 token2');
     });
 
+    it('innerText should return textContent if no children', () => {
+        let tok = new Tokenizer($el, config);
+        $el.innerHTML = '';
+        $el.innerText = 'this is a some text';
+        expect(tok.getInnerText()).toEqual('this is a some text');
+    });
+
     it('on init should not save caret position', () => {
         spyOn(utils, 'saveSelection');
         let tok = new Tokenizer($el, config);
@@ -183,5 +190,26 @@ describe('Tokenizer', () => {
         spyOn(evt, 'preventDefault');
         $el.dispatchEvent(evt);
         expect(evt.preventDefault).not.toHaveBeenCalled();
+    });
+
+    it('Should not trigger onChange/Keydown methods when composing IME', () => {
+        spyOn(config, 'onKeyDown');
+        spyOn(config, 'onChange');
+        let tok = new Tokenizer($el, config);
+        let evt = new KeyboardEvent('keydown', { key: Key.A });
+        $el.dispatchEvent(evt);
+        expect(config.onKeyDown).toHaveBeenCalledTimes(1);
+
+        let compevt = new CompositionEvent('compositionstart');
+        $el.dispatchEvent(compevt);
+        evt = new KeyboardEvent('keydown', { key: Key.A });
+        $el.dispatchEvent(evt);
+        expect(config.onKeyDown).toHaveBeenCalledTimes(1);
+
+        compevt = new CompositionEvent('compositionend');
+        $el.dispatchEvent(compevt);
+        evt = new KeyboardEvent('keydown', { key: Key.A });
+        $el.dispatchEvent(evt);
+        expect(config.onKeyDown).toHaveBeenCalledTimes(2);
     });
 });

@@ -53,6 +53,7 @@ export class Tokenizer {
     private hasWrapped: boolean;
     private config: TokenizerConfig;
     private subscriptions: Subscription[] = [];
+    private isComposingIME: boolean = false;
 
     private get innerHtml(): string {
         return this._innerHtml;
@@ -157,15 +158,21 @@ export class Tokenizer {
      * @returns {string}
      */
     public getInnerText(): string {
-        // Using lodash's lazy loading capability here. Basically creating a pipeline
-        // instead of iterating the array multiple times.
-        // http://filimanjaro.com/blog/2014/introducing-lazy-evaluation/
-        let text = chain(this.el.children)
-            .map(t => t.textContent)
-            .filter(text => !!text && text !== String.fromCharCode(8203))
-            .join(' ')
-            .replace(/\s/g, ' ')
-            .value();
+        let children = this.el.children;
+        let text;
+        if(children.length) {
+            // Using lodash's lazy loading capability here. Basically creating a pipeline
+            // instead of iterating the array multiple times.
+            // http://filimanjaro.com/blog/2014/introducing-lazy-evaluation/
+            text = chain(children)
+                .map(t => t.textContent)
+                .filter(text => !!text && text !== String.fromCharCode(8203))
+                .join(' ')
+                .replace(/\s/g, ' ')
+                .value();
+        } else {
+            text = this.el.textContent;
+        }
         return (shouldReplaceNWSP) ? text.replace(/\u200B/g, '') : text;
     }
 
@@ -213,11 +220,13 @@ export class Tokenizer {
         this.setupMousedown();
         this.setupBlur();
         this.setupPaste();
+        this.setupIMEComposition();
         this.setupResizingWrapCheck();
     }
     private setupOnChange() {
         let keyups = Observable
             .fromEvent(this.el, changeEventName)
+            .filter(e => !this.isComposingIME)
             // switchMap handles cancellation semantics of inflight requests.
             // tslint:disable-next-line:max-line-length
             // http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html#instance-method-switchMap
@@ -289,6 +298,7 @@ export class Tokenizer {
 
         let keydowns = Observable
             .fromEvent(this.el, 'keydown')
+            .filter(e => !this.isComposingIME)
             // Filter if supplied handler returns false.
             .filter((e: KeyboardEvent) => this.config.onKeyDown(e))
             .filter((e: KeyboardEvent) => keysWithSpecialHandling.has(e.key))
@@ -405,6 +415,22 @@ export class Tokenizer {
                 document.execCommand('insertText', false, pastedQuery);
             });
         this.subscriptions.push(pasteSubscription);
+    }
+    private setupIMEComposition() {
+        let imeStartSubscription = Observable
+            .fromEvent(this.el, 'compositionstart')
+            .subscribe(e => this.isComposingIME = true);
+        this.subscriptions.push(imeStartSubscription);
+
+        let imeEndSubscription = Observable
+            .fromEvent(this.el, 'compositionend')
+            .subscribe(e => {
+                this.isComposingIME = false;
+                let newQuery = this.getInnerText();
+                this.innerText = newQuery;
+                this.refreshTokens(newQuery);
+            });
+        this.subscriptions.push(imeEndSubscription);
     }
     private setupResizingWrapCheck() {
         let resizeSubscription = Observable
