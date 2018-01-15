@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.org/ashubham/tokenizer.js.svg?branch=master)](https://travis-ci.org/ashubham/tokenizer.js)
 [![Coverage Status](https://coveralls.io/repos/github/ashubham/tokenizer.js/badge.svg)](https://coveralls.io/github/ashubham/tokenizer.js)
 
-A modern async text tokenizer, for the modern web.
+A modern async text tokenizer, for the modern web. [Demo](https://codepen.io/ashubham/pen/xPJMwa?editors=0100)
 
 ![](https://github.com/ashubham/tokenizer.js/raw/master/assets/tokenizer.gif)
 
@@ -18,7 +18,7 @@ A modern async text tokenizer, for the modern web.
 
 ## Usage
 ```html
-    <div id="input" contenteditable></div>
+<div id="input" contenteditable></div>
 ```
 ```javascript
 import {Tokenizer} from 'tokenizer.js';
@@ -79,18 +79,42 @@ let tokenizer = new Tokenizer(el /* Target element */, {
 
 ## Public Methods
 
-Method | Description
---- | --- 
-`clear ()` | Clear tokenizer text.
-`blur ()` | Blur the tokenizer (loose focus).
-`getCaretTokenPosition ()` | Get coords of the token having the caret.
-`getTokenPosition (idx: number)` | Gets the position of the token at [idx] index.
-`updateText(text: string)` | Replace the text of the tokenizer with new text, this is followed by a reTokenization.
-```updateDisplay (tokens: DisplayToken[], caretTokenIdx: number, refreshTokens: bool)``` | Update the tokenizer display with a new set of `tokens`, puts the caret after `caretTokenIdx` token, if `refreshTokens=true` reTokenization will follow.
-`getInnerText (): string` | Gets the text equivalent of the tokenizer. Santizes it to remove spurious linebreaks.
-`hasFocus (): bool` | Whether the tokenizer has focus.
-`getNumTokens (): number` | Gets the number of tokens
-`selectNodeByIdx (idx: number)` | Sets the caret at the start of the `idx` index token.
+```typescript
+let tokenizer = new Tokenizer(el, config);
+
+// Clear the tokenizer text.
+tokenizer.clear();
+
+// Blur the tokenizer (loose focus).
+tokenizer.blur();
+
+// Get coords of the token having the caret.
+tokenizer.getCaretTokenPosition(); // {x: 50, y: 80} For eg.
+
+// Gets the position of the token at [idx] index.
+tokenizer.getTokenPosition(idx: number);
+
+// Replace the text of the tokenizer with new text.
+// This is followed by a automatic reTokenization.
+tokenizer.updateText(text: string);
+
+// Update the tokenizer display with a new set of `tokens`,
+// puts the caret after `caretTokenIdx` token,
+// if `reTokenization=true` reTokenization will follow.
+tokenizer.updateDisplay(tokens: DisplayToken[], caretTokenIdx: number, reTokenization: bool);
+
+// Gets the text equivalent of the tokenizer.
+tokenizer.getInnerText() // 'Some string user entered'
+
+// Whether the tokenizer has focus.
+tokenizer.hasFocus() // true
+
+// Gets the number of tokens.
+tokenizer.getNumTokens() // 4
+
+// Sets the caret at the start of the `idx` index token.
+tokenizer.selectNodeByIdx(idx: number);
+```
 
  ### DisplayToken
 
