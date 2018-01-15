@@ -8,7 +8,8 @@ A modern async text tokenizer, for the modern web. [Demo](https://codepen.io/ash
 
 ## Features
 
-- Pure Javascript (No JQuery/Frameworks).
+- Pure Javascript (Uses No JQuery or Frameworks).
+    - But can be used with any.
 - Based on Reactive Streams (RxJS).
 - Fully Async, get tokenization using REST calls.
 - Written in TypeScript (types bundled).
