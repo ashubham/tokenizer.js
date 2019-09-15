@@ -24,6 +24,9 @@ A modern async text tokenizer, for the modern web. [Demo](https://codepen.io/ash
 - [Supercharge your search bar with visual tokens!](https://medium.com/@ashishshubham/supercharge-your-search-with-tokenization-32321a87f309)
 
 ## Usage
+```bash
+$ npm i tokenizer.js
+```
 ```html
 <div id="input" contenteditable></div>
 ```
