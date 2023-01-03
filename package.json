@@ -55,7 +55,7 @@
     "less-plugin-clean-css": "^1.5.1",
     "typescript": "^2.5.3",
     "uglifyjs-webpack-plugin": "^1.1.1",
-    "webpack": "^3.8.1"
+    "webpack": "^5.75.0"
   },
   "dependencies": {
     "detect-browser": "^2.0.0",
